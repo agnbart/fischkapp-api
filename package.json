@@ -1,0 +1,12 @@
+{
+  "name": "fischkapp-api",
+  "version": "0.0.1",
+  "description": "API for FischkApp",
+  "main": "index.js",
+  "repository": "https://github.com/nerdbord/fischkapp-api.git",
+  "author": "Nerdbord",
+  "license": "MIT",
+  "scripts": {
+    "server": "node index.js"
+  }
+}
