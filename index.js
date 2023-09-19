@@ -9,11 +9,14 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mydata
 const client = new MongoClient(MONGODB_URI);
 
 (async() => {
-    await client.connect();
-    console.log('Baza połączona!');
-    await client.close();
+    try {
+        await client.connect();
+        console.log('Connecting to database ' + MONGODB_URI);
+    } catch (err) {
+        console.error(`Error connecting to database: ${err}`);
+    }
 })();
 
 app.listen(PORT,'localhost',() => {
     console.log(`Server listening on http://localhost:${PORT}`)
-})
+});
