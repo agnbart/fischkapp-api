@@ -1,10 +1,10 @@
-const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
+import * as express from 'express';
+import {MongoClient} from 'mongodb';
 
 const app = express();
 
-const PORT = process.env.PORT || 4000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mydatabase';
+const PORT: number = Number(process.env.PORT) || 4000;
+const MONGODB_URI: string = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mydatabase';
 
 const client = new MongoClient(MONGODB_URI);
 

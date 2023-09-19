@@ -2,12 +2,13 @@
   "name": "fischkapp-api",
   "version": "0.0.1",
   "description": "API for FischkApp",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "https://github.com/nerdbord/fischkapp-api.git",
   "author": "Nerdbord",
   "license": "MIT",
   "scripts": {
-    "server": "node index.js"
+    "server": "ts-node index.ts",
+    "start:dev": "tsnd index.ts"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -15,6 +16,9 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
-    "@types/node": "^20.6.2"
+    "@types/node": "^20.6.2",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
   }
 }
