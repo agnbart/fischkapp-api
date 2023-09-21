@@ -1,21 +1,17 @@
 import * as express from 'express';
-import {MongoClient} from 'mongodb';
+import {homeRouter} from "./routers/home";
+import {cardRouter} from "./routers/card";
 
 const app = express();
 
 const PORT: number = Number(process.env.PORT) || 4000;
-const MONGODB_URI: string = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mydatabase';
 
-const client = new MongoClient(MONGODB_URI);
+require ('./db/mongodb');
 
-(async() => {
-    try {
-        await client.connect();
-        console.log('Connecting to database ' + MONGODB_URI);
-    } catch (err) {
-        console.error(`Error connecting to database: ${err}`);
-    }
-})();
+app.use(express.json());
+
+app.use('/', homeRouter)
+app.use('/cards', cardRouter);
 
 app.listen(PORT,'localhost',() => {
     console.log(`Server listening on http://localhost:${PORT}`)
