@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "server": "ts-node index.ts",
+    "server:mongodb": "cd /d c://Program Files//MongoDB//Server//6.0//bin && mongod",
     "start:dev": "tsnd index.ts"
   },
   "dependencies": {
