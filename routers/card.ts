@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {CardClass, CreateCardPayload} from "../records/card.records";
+import {CardClass, CreateCardPayload, UpdateCardPayload} from "../records/card.records";
 import {cardCollection} from "../utils/db";
 import {ObjectId} from "mongodb";
 
@@ -38,21 +38,20 @@ cardRouter
             res.status(400).json({ error: 'Invalid ObjectId' });
             return;
         }
-
         const existingCard = await cardCollection.findOne({ _id: objectId });
-
         if (!existingCard) {
             res.status(404).json({ error: 'Card not found in the database'});
             throw new Error("Card not found in the database.")
         }
 
+        const {front, back, tags}: UpdateCardPayload = req.body;
         try {
             await cardCollection.updateOne({
                 _id: objectId,
             },{$set: {
-                    front: req.body.front,
-                    back: req.body.back,
-                    tags: req.body.tags,
+                    front: front,
+                    back: back,
+                    tags: tags,
                 }})
             res.status(200).json({ id: hash });
         } catch (err) {
