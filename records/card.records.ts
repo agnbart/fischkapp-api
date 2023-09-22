@@ -7,6 +7,12 @@ export interface CreateCardPayload {
     author: string;
 }
 
+export interface UpdateCardPayload {
+    front: string;
+    back: string;
+    tags: string[];
+}
+
 export class CardClass implements CreateCardPayload{
     public front: string;
     public back: string;
