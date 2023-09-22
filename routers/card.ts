@@ -42,7 +42,7 @@ cardRouter
         const existingCard = await cardCollection.findOne({ _id: objectId });
 
         if (!existingCard) {
-            res.status(400).json({ error: 'Card not found in the database'});
+            res.status(404).json({ error: 'Card not found in the database'});
             throw new Error("Card not found in the database.")
         }
 
