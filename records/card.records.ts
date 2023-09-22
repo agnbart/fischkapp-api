@@ -30,7 +30,7 @@ export class CardClass implements CreateCardPayload{
 
     static async isFrontTaken(front: string): Promise<boolean> {
         const existingCard = await cardCollection.findOne({ front});
-        return existingCard.length !== 0;
+        return existingCard !== null;
     }
 
 }
