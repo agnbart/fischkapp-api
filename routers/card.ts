@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import {addMinutes} from 'date-fns'
 import {CardClass, CreateCardPayload, UpdateCardPayload} from "../records/card.records";
 import {cardCollection} from "../utils/db";
 import {ObjectId} from "mongodb";
@@ -61,7 +62,12 @@ cardRouter
         const existingCard = await validateCardId(cardId, res);
         const cardObjectId = new ObjectId(cardId);
 
+        const olderThanTimestamp = Math.floor(addMinutes(new Date(), -5).getTime() / 1000);
         try {
+            if (cardObjectId.getTimestamp().getTime() / 1000 > olderThanTimestamp) {
+                res.status(403).json("The card cannot be removed. It was established in the last 5 minutes.");
+                return;
+            }
             await cardCollection.deleteOne({_id: cardObjectId});
             res.status(200).json({success: 'The card has been deleted'})
         } catch(err) {
