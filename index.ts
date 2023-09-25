@@ -10,7 +10,7 @@ const PORT: number = Number(process.env.PORT) || 4000;
 require ('./db/mongodb');
 
 const corsOptions = {
-    origin: 'http://localhost:2000'
+    origin: process.env.CORS_ORIGIN || 'http://localhost:2000'
 };
 
 app.use(cors(corsOptions));
