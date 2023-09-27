@@ -8,12 +8,11 @@ export const checkAuthorization = (req: Request, res: Response, next: NextFuncti
     if (authorizationHeader) {
         const authorizationValue = req.rawHeaders[req.rawHeaders.indexOf(authorizationHeader) + 1];
         if (authorizationValue && authorizationValue === "pss-this-is-my-secret") {
-            console.log('Authorization header:', authorizationValue);
-            res.send('Authorization header received');
+            next()
         } else {
-            res.status(400).send('Invalid authorization');
+            res.status(401).send('Invalid authorization');
         }
     } else {
-        res.status(400).send('Authorization header missing');
+        res.status(401).send('Authorization header missing');
     }
 }
