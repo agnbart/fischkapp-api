@@ -52,6 +52,12 @@ describe('3. POST /cards', () => {
             .expect(201)
             .end(async(err,res) => {
                 if (err) return done(err);
+                const createdCard = await cardCollection.findOne({ front: testCard.front });
+                expect(createdCard).to.exist;
+                expect(createdCard.front).to.equal(testCard.front);
+                expect(createdCard.back).to.equal(testCard.back);
+                expect(createdCard.tags).to.deep.equal(testCard.tags);
+                expect(createdCard.author).to.equal(testCard.author);
                 expect(res.status).to.equal(201);
                 done();
             });
