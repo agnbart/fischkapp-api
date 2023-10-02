@@ -44,7 +44,7 @@ cardRouter
         const tag = decodeURIComponent(req.params.tag);
 
         try {
-            const cardsCursor = await cardCollection.find({tags: {$in:[tag]}}).sort({_id: -1});
+            const cardsCursor = await cardCollection.find().sort({_id: -1});
             const cards = await cardsCursor.toArray();
 
             if (cards.length === 0) {
