@@ -42,7 +42,7 @@ describe('3. PUT /cards/:id', () => {
         const testCardId = '651a6a899a7cfe29a9c25001';
         const testMongoID = new ObjectId(testCardId);
         const newData = {
-            front: 'Updated front of testing card',
+            front: 'Updated front of testing card 1',
             back: 'Updated back of testing card',
             tags: ['updated1', 'updated2'],
             author: 'Updated author of testing card'
@@ -51,21 +51,14 @@ describe('3. PUT /cards/:id', () => {
         console.log(newData);
 
         request(app)
-            .put(`/cards/${testMongoID}`,(err, res) => {
-                cardCollection.updateOne({
-                    _id: testMongoID
-                }, {
-                    $set: {
-                        front: newData.front,
-                        back: newData.back,
-                        tags: newData.tags,
-                        author: newData.author
-                    }})
-            })
+            .put(`/cards/${testMongoID}`)
+            .send(newData)
             .set('Authorization', authToken)
             .expect(200)
-            .end((err, res) => {
+            .end(async (err, res) => {
                 if (err) return done(err);
+                const updatedCard = await cardCollection.findOne({_id: testMongoID});
+                expect(res.status).to.equal(200);
                 done();
             });
     });

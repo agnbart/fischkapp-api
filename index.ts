@@ -4,7 +4,7 @@ import {homeRouter} from "./routers/home";
 import {cardRouter} from "./routers/card";
 import {checkAuthorization} from "./utils/check-authorization";
 
-const app = express();
+export const app = express();
 
 const PORT: number = Number(process.env.PORT) || 4000;
 
