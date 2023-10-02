@@ -58,7 +58,13 @@ describe('3. PUT /cards/:id', () => {
             .end(async (err, res) => {
                 if (err) return done(err);
                 const updatedCard = await cardCollection.findOne({_id: testMongoID});
+                expect(updatedCard).to.exist;
+                expect(updatedCard.front).to.equal(newData.front);
+                expect(updatedCard.back).to.equal(newData.back);
+                expect(updatedCard.tags).to.equal(newData.tags);
+                expect(updatedCard.author).to.equal(newData.author);
                 expect(res.status).to.equal(200);
+                expect(res.body).to.deep.equal(updatedCard);
                 done();
             });
     });
