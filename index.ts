@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use('/', homeRouter)
 app.use('/cards', cardRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(PORT,'localhost',() => {
     console.log(`Server listening on http://localhost:${PORT}`)
