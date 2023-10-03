@@ -1,8 +1,10 @@
 import * as express from 'express';
 import cors = require('cors');
+import swaggerUi = require('swagger-ui-express');
 import {homeRouter} from "./routers/home";
 import {cardRouter} from "./routers/card";
 import {checkAuthorization} from "./utils/check-authorization";
+import swaggerSpec from './docs/swaggerConfig.js';
 
 export const app = express();
 
@@ -22,6 +24,7 @@ app.use(express.json());
 
 app.use('/', homeRouter)
 app.use('/cards', cardRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(PORT,'localhost',() => {
     console.log(`Server listening on http://localhost:${PORT}`)
