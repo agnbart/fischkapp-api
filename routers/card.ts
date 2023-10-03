@@ -65,14 +65,14 @@ cardRouter
         const olderThanTimestamp = Math.floor(addMinutes(new Date(), -5).getTime() / 1000);
         try {
             if (cardObjectId.getTimestamp().getTime() / 1000 > olderThanTimestamp) {
-                res.status(403).json("The card cannot be removed. It was established in the last 5 minutes.");
+                res.status(403).json("The card cannot be removed. It was created more then 5 minutes.");
                 return;
             }
             await cardCollection.deleteOne({_id: cardObjectId});
-            res.status(200).json({success: 'The card has been deleted'})
+            res.status(204).json({success: 'The card has been deleted'})
         } catch(err) {
             console.error('Error deleting card from database:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
+            res.status(404).json({ error: 'Card does not exist' });
         }
     })
 
