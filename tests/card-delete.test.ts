@@ -58,28 +58,8 @@ describe('3. DELETE /cards/:id', () => {
 });
 
 describe('4. DELETE /cards/:id',() => {
-    it('should return status 204 if card can be deleted (newest then 5 minutes)', (done) => {
-        const testCardId = '651bcb3737504246bcb7c113';
-        const testCardObjectId = new ObjectId(testCardId);
-        const cardTime = testCardObjectId.getTimestamp().getTime() / 1000
-        if (cardTime < fiveMinutesAgo) {
-            request(app)
-                .delete(`/cards/${testCardObjectId}`)
-                .set('Authorization', authToken)
-                .expect(204)
-                .end(async (err, res) => {
-                    if (err) return done(err);
-                    await cardCollection.deleteOne({_id: testCardObjectId});
-                    expect(res.status).to.equal(204);
-                    done();
-                });
-        }
-    });
-});
-
-describe('5. DELETE /cards/:id',() => {
     it('should return status 403 if card can not be deleted (oldest then 5 minutes)', (done) => {
-        const testCardId = '651bc8a7960d55146902a153';
+        const testCardId = '651bb5ec1bd5745d1487e6d4';
         const testCardObjectId = new ObjectId(testCardId);
         const cardTime = testCardObjectId.getTimestamp().getTime() / 1000
         if (cardTime > fiveMinutesAgo) {
@@ -93,7 +73,30 @@ describe('5. DELETE /cards/:id',() => {
                     expect(res.status).to.equal(403);
                     done();
                 });
+        } else {
+            done();
         }
     });
 });
 
+describe('5. DELETE /cards/:id',() => {
+    it('should return status 204 if card can be deleted (newest then 5 minutes)', (done) => {
+        const testCardId = '651bd60437504246bcb7c116';
+        const testCardObjectId = new ObjectId(testCardId);
+        const cardTime = testCardObjectId.getTimestamp().getTime() / 1000
+        if (cardTime < fiveMinutesAgo) {
+            request(app)
+                .delete(`/cards/${testCardObjectId}`)
+                .set('Authorization', authToken)
+                .expect(204)
+                .end(async (err, res) => {
+                    if (err) return done(err);
+                    await cardCollection.deleteOne({_id: testCardObjectId});
+                    expect(res.status).to.equal(204);
+                    done();
+                });
+        } else {
+            done();
+        }
+    });
+});
