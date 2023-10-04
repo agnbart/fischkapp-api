@@ -4,14 +4,14 @@ import swaggerUi = require('swagger-ui-express');
 import {homeRouter} from "./routers/home";
 import {cardRouter} from "./routers/card";
 import {checkAuthorization} from "./utils/check-authorization";
-import swaggerSpec from './docs/swaggerConfig.js';
+import swaggerSpec from './docs/swaggerConfig';
 
 export const app = express();
 
 const PORT: number = Number(process.env.PORT) || 4000;
 
 require ('./db/mongodb');
-
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(checkAuthorization);
 
 const corsOptions = {
@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use('/', homeRouter)
 app.use('/cards', cardRouter);
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.listen(PORT,'localhost',() => {
     console.log(`Server listening on http://localhost:${PORT}`)
