@@ -21,3 +21,7 @@ Express.js + Typescript, MongoDB, Mongoose
 ### 📖 How to start this service
 
 1. Run ``yarn server``
+
+### Deployed app URL on render.com
+
+https://fischkapp-api-agnbart.onrender.com

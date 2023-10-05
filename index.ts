@@ -15,7 +15,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(checkAuthorization);
 
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN || 'http://localhost:2000',
+    origin: process.env.CORS_ORIGIN || `http://localhost:${PORT}`,
 };
 
 app.use(cors(corsOptions));
@@ -26,6 +26,6 @@ app.use('/', homeRouter)
 app.use('/cards', cardRouter);
 
 
-app.listen(PORT,'localhost',() => {
+app.listen(PORT,() => {
     console.log(`Server listening on http://localhost:${PORT}`)
 });
