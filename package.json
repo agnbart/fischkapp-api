@@ -30,6 +30,7 @@
     "@types/node": "^20.6.2",
     "@types/supertest": "^2.0.14",
     "@types/swagger-jsdoc": "^6.0.1",
+    "mocha": "^10.2.0",
     "mockgoose": "^8.0.4",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
