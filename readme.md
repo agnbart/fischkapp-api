@@ -22,6 +22,5 @@ Express.js + Typescript, MongoDB, Mongoose
 
 1. Run ``yarn server``
 
-### Deployed app URL on render.com
-
-https://fischkapp-api-agnbart.onrender.com
+- - -
+The GitHub repository does not contain a file with the database access credentials.
